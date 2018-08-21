@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script>
+      google.script.run.withSuccessHandler(fillFormInputs).getProperties();
+      function fillFormInputs(oldData) {
+        document.getElementById("columnToWatch").value = oldData[0];
+        document.getElementById("nbColumnsInRow").value = oldData[1];
+        document.getElementById("formatingString").value = oldData[2];
+      }
+      function getInputData(){
+        var data = [{
+          "columnToWatch":document.getElementById('columnToWatch').value,
+          "nbColumnsInRow":document.getElementById('nbColumnsInRow').value,
+          "formatingString":document.getElementById('formatingString').value
+        }];
+        google.script.run.withSuccessHandler(closeIt).setProperties(data);
+      };
+      function closeIt(){
+        google.script.host.close()
+      };
+    </script>
+  </head>
+  <body>
+    <table style="border:none;">
+    <tr><td>Column to Watch: </td>
+    <td><input type="number" name="columnToWatch" id="columnToWatch" min="1" value="" style="width:250px;" /></td></tr>
+    <tr><td>Number of columns to colorize: </td>
+    <td><input type="number" name="nbColumnsInRow" id="nbColumnsInRow" min="1" value=">" style="width:250px;" /></td></tr>
+    <tr><td>Formating rules (value:color):  </td>
+    <td><input type="text" name="formatingString" id="formatingString" value="" style="width:250px;" /></td></tr>
+    </table>
+    <br />
+    <input type="button" value="Submit" class="action" onclick="getInputData()" >
+    <input type="button" value="Cancel" onclick="google.script.host.close()" >
+  </body>
+</html>
+
+
