@@ -3,36 +3,120 @@
   <head>
     <base target="_top">
     <script>
-      google.script.run.withSuccessHandler(fillFormInputs).getProperties();
-      function fillFormInputs(oldData) {
-        document.getElementById("columnToWatch").value = oldData[0];
-        document.getElementById("nbColumnsInRow").value = oldData[1];
-        document.getElementById("formatingString").value = oldData[2];
+      var inputID = 1;
+      google.script.run.withSuccessHandler(fillFormData).getProperties();
+      
+      function fillFormData(oldData) {
+        oldData = oldData[0];
+        document.getElementById("columnToWatch").value = oldData["columnToWatch"];
+        document.getElementById("nbColumnsInRow").value = oldData["nbColumnsInRow"];
+        var rules = oldData["formatingRules"];
+        if (rules != "") {
+          for (var i=0; i<rules.length; i++) {
+            addInputsRow(rules[i][0], rules[i][1]);
+          }
+        }
       }
-      function getInputData(){
+      
+      function sendInputData(){
+        // create formating rules string
+        var valueNodesList = document.querySelectorAll('*[id^="value"]');
+        var formatingString = "";
+        for (var i=0; i<valueNodesList.length; i++) {
+          var valueNodeId = valueNodesList[i].id;
+          var value = document.getElementById(valueNodeId).value;
+          var color = document.getElementById("color" + valueNodeId.substring(5)).value;
+          formatingString += value + ":" + color + ", ";
+        }
+        formatingString = formatingString.slice(0, -2);
+        // create array and send data
         var data = [{
           "columnToWatch":document.getElementById('columnToWatch').value,
           "nbColumnsInRow":document.getElementById('nbColumnsInRow').value,
-          "formatingString":document.getElementById('formatingString').value
+          "formatingRules":formatingString
         }];
-        google.script.run.withSuccessHandler(closeIt).setProperties(data);
+        google.script.run.withSuccessHandler(close).setProperties(data);
       };
-      function closeIt(){
+      
+      function close(){
         google.script.host.close()
       };
+      
+      function addInputsRow(defaultValue, defaultColor){
+
+        var container = document.getElementById("rulesContainer");
+        var row = document.createElement("tr");
+        row.id = "row" + inputID;
+        var column1 = document.createElement("td");
+        var column2 = document.createElement("td");
+        var column3 = document.createElement("td");
+        var text1 = createTextElement("- Matching value: ");
+        var text2 = createTextElement("Color: ");
+        var input1 = createInputField("value"+inputID, defaultValue);
+        var input2 = createInputField("color"+inputID, defaultColor);
+        var removeButton = createRemoveButton(row.id);
+
+        container.appendChild(row);
+        row.appendChild(column1);
+        row.appendChild(column2);
+        row.appendChild(column3);
+        column1.appendChild(text1);
+        column1.appendChild(input1);
+        column2.appendChild(text2);
+        column2.appendChild(input2);
+        column3.appendChild(removeButton);
+        
+        inputID += 1;
+      }
+      
+      function createTextElement(text){
+        var span = document.createElement('span');
+        span.style = "margin-left:20px;";
+        span.appendChild(document.createTextNode(text));
+        return span;
+      }
+      
+      function createInputField(name, value){
+        var input = document.createElement("input");
+        input.type = "text";
+        input.name = name;
+        input.id = name;
+        input.min = 1;
+        input.style = "width:80px;"
+        input.value = value;
+        return input;
+      }
+      
+      function createRemoveButton(rowID){
+        var removeButton = document.createElement("input");
+        removeButton.type="button";
+        removeButton.value="Remove";
+        removeButton.onclick= function() { removeInputField(rowID); }
+        removeButton.style = "margin-left:10px;";
+        return removeButton;
+      }
+      
+      function removeInputField(name){
+        document.getElementById(name).remove();
+      }
     </script>
   </head>
   <body>
     <table style="border:none;">
-    <tr><td>Column to Watch: </td>
-    <td><input type="number" name="columnToWatch" id="columnToWatch" min="1" value="" style="width:250px;" /></td></tr>
-    <tr><td>Number of columns to colorize: </td>
-    <td><input type="number" name="nbColumnsInRow" id="nbColumnsInRow" min="1" value=">" style="width:250px;" /></td></tr>
-    <tr><td>Formating rules (value:color):  </td>
-    <td><input type="text" name="formatingString" id="formatingString" value="" style="width:250px;" /></td></tr>
+      <tr>
+        <td>Column to Watch: </td>
+        <td><input type="number" name="columnToWatch" id="columnToWatch" min="1" style="width:250px;" /></td></tr>
+      <tr>
+        <td>Number of columns to colorize: </td>
+        <td><input type="number" name="nbColumnsInRow" id="nbColumnsInRow" min="1" style="width:250px;" /></td></tr>
+      <tr>
+        <td>Formating rules (value:color): </td>
+        <td><input type="button" value="Add new rule" class="action" onclick="addInputsRow('','')"  /></td></tr>
+      <tr>
+        <td colspan="2"><table id="rulesContainer"></table></td></tr>
     </table>
     <br />
-    <input type="button" value="Submit" class="action" onclick="getInputData()" >
+    <input type="button" value="Submit" class="action" onclick="sendInputData()" >
     <input type="button" value="Cancel" onclick="google.script.host.close()" >
   </body>
 </html>

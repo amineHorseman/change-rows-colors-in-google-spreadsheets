@@ -1,7 +1,12 @@
 
 function onInstall(e) {
   // set default properties
-  var data = [3, 4, 'low:yellow, medium:#ff8b00, high:red'];
+  PropertiesService.getDocumentProperties().deleteAllProperties();
+  data = [{
+    "columnToWatch": 3,
+    "nbColumnsInRow": 4,
+    "formatingRules": "Low:yellow, Medium:#ff8b00, High:red"
+  }];
   setProperties(data);
   
   // set onFormSubmit trigger
@@ -24,9 +29,10 @@ function onOpen() {
 }
 
 function showDialog() {
+  
   var html = HtmlService.createHtmlOutputFromFile('dialogBox')
-       .setWidth(500)
-       .setHeight(150);
+       .setWidth(530)
+       .setHeight(220);
   SpreadsheetApp.getUi()
       .showModalDialog(html, 'Plugin settings (ChangeRowColors)');
 }
