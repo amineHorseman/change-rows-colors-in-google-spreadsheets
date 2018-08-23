@@ -6,15 +6,13 @@ function changeRowColor(e){
   var nbColumnsInRow = data[1];
   var formatingRules = parseFormatingRules(data[2]);
   
-  // get the current range
+  // get the current row values
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheets()[0];
-  var range = e.range;
-  var value = range.getValue();
-
+  var rowRange = sheet.getRange(e.range.getRow(),1,1,nbColumnsInRow);
+  var value = rowRange.getValues()[0][columnToWatch-1];
+  
   // change background color for the entire line
-  var rowRange = sheet.getRange(range.getRow(),1,1,nbColumnsInRow);
-  if (range.getColumn() == columnToWatch)
     for (var i=0; i<formatingRules.length; i++) {
       if (value == formatingRules[i][0]) {
         rowRange.setBackground(formatingRules[i][1]);
@@ -25,10 +23,10 @@ function changeRowColor(e){
     }
 }
 
-function onEdit(e){  
+function onEdit(e){
   changeRowColor(e);
 }
 
-function onFormSubmit(e){  
+function onFormSubmit(e){ 
   changeRowColor(e);
 }

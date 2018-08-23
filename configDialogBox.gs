@@ -1,7 +1,17 @@
 
 function onInstall(e) {
-  var data = [3, 4, 'Low:Yellow, Medium:#ff8b00, High:red']; // default parameters on install
+  // set default properties
+  var data = [3, 4, 'low:yellow, medium:#ff8b00, high:red'];
   setProperties(data);
+  
+  // set onFormSubmit trigger
+  var sheet = SpreadsheetApp.getActive();
+  ScriptApp.newTrigger("onFormSubmit")
+           .forSpreadsheet(sheet)
+           .onFormSubmit()
+           .create();
+  
+  // create menu items
   onOpen(e);
 }
 
