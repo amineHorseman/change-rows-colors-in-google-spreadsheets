@@ -2,9 +2,10 @@
 function changeRowColor(e){
   // get parameters
   var data = getProperties(); 
-  var columnToWatch = data[0];
-  var nbColumnsInRow = data[1];
-  var formatingRules = parseFormatingRules(data[2]);
+  data = data[0];
+  var columnToWatch = data["columnToWatch"];
+  var nbColumnsInRow = data["nbColumnsInRow"];
+  var formatingRules = data["formatingRules"];
   
   // get the current row values
   var ss = SpreadsheetApp.getActiveSpreadsheet();
