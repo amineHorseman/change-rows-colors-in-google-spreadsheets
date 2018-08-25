@@ -10,6 +10,7 @@
         oldData = oldData[0];
         document.getElementById("columnToWatch").value = oldData["columnToWatch"];
         document.getElementById("nbColumnsInRow").value = oldData["nbColumnsInRow"];
+        document.getElementById("ignoreCase").checked = (oldData["ignoreCase"] === 'true');
         var rules = oldData["formatingRules"];
         if (rules != "") {
           for (var i=0; i<rules.length; i++) {
@@ -33,6 +34,7 @@
         var data = [{
           "columnToWatch":document.getElementById('columnToWatch').value,
           "nbColumnsInRow":document.getElementById('nbColumnsInRow').value,
+          "ignoreCase":document.getElementById("ignoreCase").checked.toString(),
           "formatingRules":formatingString
         }];
         google.script.run.withSuccessHandler(close).setProperties(data);
@@ -109,6 +111,9 @@
       <tr>
         <td>Number of columns to colorize: </td>
         <td><input type="number" name="nbColumnsInRow" id="nbColumnsInRow" min="1" style="width:250px;" /></td></tr>
+      <tr>
+        <td>Ignore case sensitivity: </td>
+        <td><input type="checkbox" name="ignoreCase" id="ignoreCase" /></td></tr>
       <tr>
         <td>Formating rules (value:color): </td>
         <td><input type="button" value="Add new rule" class="action" onclick="addInputsRow('','')"  /></td></tr>

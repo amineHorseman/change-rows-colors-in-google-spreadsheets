@@ -5,6 +5,7 @@ function onInstall(e) {
   data = [{
     "columnToWatch": 3,
     "nbColumnsInRow": 4,
+    "ignoreCase": 'true',
     "formatingRules": "Low:yellow, Medium:#ff8b00, High:red"
   }];
   setProperties(data);
@@ -32,7 +33,7 @@ function showDialog() {
   
   var html = HtmlService.createHtmlOutputFromFile('dialogBox')
        .setWidth(530)
-       .setHeight(220);
+       .setHeight(250);
   SpreadsheetApp.getUi()
       .showModalDialog(html, 'Plugin settings (ChangeRowColors)');
 }

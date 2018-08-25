@@ -5,6 +5,7 @@ function changeRowColor(e){
   data = data[0];
   var columnToWatch = data["columnToWatch"];
   var nbColumnsInRow = data["nbColumnsInRow"];
+  var ignoreCase = data["ignoreCase"];
   var formatingRules = data["formatingRules"];
   
   // get the current row values
@@ -15,7 +16,12 @@ function changeRowColor(e){
   
   // change background color for the entire line
     for (var i=0; i<formatingRules.length; i++) {
-      if (value == formatingRules[i][0]) {
+      var matchingValue = formatingRules[i][0];
+      if (ignoreCase === 'true') {
+        value = value.toLowerCase();
+        matchingValue = matchingValue.toLowerCase();
+      }
+      if (value == matchingValue) {
         rowRange.setBackground(formatingRules[i][1]);
         break;
       }

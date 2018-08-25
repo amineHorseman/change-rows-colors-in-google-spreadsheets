@@ -3,11 +3,13 @@ function getProperties() {
   var documentProperties = PropertiesService.getDocumentProperties();
   var columnToWatch = documentProperties.getProperty('columnToWatch');
   var nbColumnsInRow = documentProperties.getProperty('nbColumnsInRow');
+  var ignoreCase = documentProperties.getProperty('ignoreCase');
   var formatingRules = documentProperties.getProperty('formatingRules');
 
   var data = [{
     "columnToWatch": parseInt(columnToWatch),
     "nbColumnsInRow": parseInt(nbColumnsInRow),
+    "ignoreCase": ignoreCase,
     "formatingRules": parseFormatingRules(formatingRules)
   }];
   return data;
@@ -16,12 +18,14 @@ function getProperties() {
 function setProperties(data){
   data = data[0];
   var columnToWatch = data["columnToWatch"];
-  var nbColumnsInRow = data["nbColumnsInRow"];                        
+  var nbColumnsInRow = data["nbColumnsInRow"]; 
+  var ignoreCase = data["ignoreCase"]; 
   var formatingString = data["formatingRules"];
   
   var documentProperties = PropertiesService.getDocumentProperties();
   documentProperties.setProperty('columnToWatch', columnToWatch);
   documentProperties.setProperty('nbColumnsInRow', nbColumnsInRow);
+  documentProperties.setProperty('ignoreCase', ignoreCase);
   documentProperties.setProperty('formatingRules', formatingString);
 }
 
