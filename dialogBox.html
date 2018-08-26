@@ -7,9 +7,11 @@
       google.script.run.withSuccessHandler(fillFormData).getProperties();
       
       function fillFormData(oldData) {
+        addDefaultColorInput();
         oldData = oldData[0];
         document.getElementById("columnToWatch").value = oldData["columnToWatch"];
         document.getElementById("nbColumnsInRow").value = oldData["nbColumnsInRow"];
+        document.getElementById("defaultColor").value = oldData["defaultColor"];
         document.getElementById("ignoreCase").checked = (oldData["ignoreCase"] === 'true');
         var rules = oldData["formatingRules"];
         if (rules != "") {
@@ -34,6 +36,7 @@
         var data = [{
           "columnToWatch":document.getElementById('columnToWatch').value,
           "nbColumnsInRow":document.getElementById('nbColumnsInRow').value,
+          "defaultColor":document.getElementById('defaultColor').value,
           "ignoreCase":document.getElementById("ignoreCase").checked.toString(),
           "formatingRules":formatingString
         }];
@@ -58,7 +61,8 @@
         var input2 = createInputField("color"+inputID, defaultColor);
         var removeButton = createRemoveButton(row.id);
 
-        container.appendChild(row);
+        //container.appendChild(row);
+        container.insertBefore(row, document.getElementById("defaultColorRow"));
         row.appendChild(column1);
         row.appendChild(column2);
         row.appendChild(column3);
@@ -69,6 +73,25 @@
         column3.appendChild(removeButton);
         
         inputID += 1;
+      }
+      
+      function addDefaultColorInput(color){
+        var container = document.getElementById("rulesContainer");
+        var row = document.createElement("tr");
+        row.id = "defaultColorRow";
+        var column1 = document.createElement("td");
+        var column2 = document.createElement("td");
+        var column3 = document.createElement("td");
+        var text1 = createTextElement("- Default color: ");
+        text1.style = "margin-left:20px;margin-right: 15px;";
+        var input1 = createInputField("defaultColor", color);
+
+        container.appendChild(row);
+        row.appendChild(column1);
+        row.appendChild(column2);
+        row.appendChild(column3);
+        column1.appendChild(text1);
+        column1.appendChild(input1);
       }
       
       function createTextElement(text){
@@ -83,7 +106,6 @@
         input.type = "text";
         input.name = name;
         input.id = name;
-        input.min = 1;
         input.style = "width:80px;"
         input.value = value;
         return input;

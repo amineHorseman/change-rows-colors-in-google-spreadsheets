@@ -5,6 +5,7 @@ function changeRowColor(e){
   data = data[0];
   var columnToWatch = data["columnToWatch"];
   var nbColumnsInRow = data["nbColumnsInRow"];
+  var defaultColor = data["defaultColor"];
   var ignoreCase = data["ignoreCase"];
   var formatingRules = data["formatingRules"];
   
@@ -26,7 +27,7 @@ function changeRowColor(e){
         break;
       }
       // if no matching value found, set the background to default color
-      rowRange.setBackground("white");
+      rowRange.setBackground(defaultColor);
     }
 }
 

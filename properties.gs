@@ -14,7 +14,6 @@ function getProperties() {
     "ignoreCase": ignoreCase,
     "formatingRules": parseFormatingRules(formatingRules)
   }];
-  Logger.log(data);
   return data;
 }
 
