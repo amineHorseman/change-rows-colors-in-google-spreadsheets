@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script>
+      var rowsCount = 0;
+      google.script.run.withSuccessHandler(showQuestion).getRowsCount();
+      function showQuestion(rowsCount) {
+        var text = "Parse all " + rowsCount + " rows and apply color formating?";
+        var title = document.getElementById("question");
+        title.appendChild(document.createTextNode(text));
+        if (rowsCount > 20)
+          document.getElementById("question-details").appendChild(document.createTextNode("The operation may take some time"));
+      }
+      
+      function parseAllRows() {
+        google.script.run.withSuccessHandler(close).parseAllRows();
+      }
+      
+      function close(){
+        google.script.host.close()
+      };
+    </script>
+  </head>
+  <body>
+    <div>
+      <p>
+        <span id="question" style="font-size:1.2em;"></span><br />
+        <span id="question-details"></span>
+      </p>
+      <input type="button" value="Yes" onclick="parseAllRows()" />
+      <input type="button" value="Cancel" onclick="google.script.host.close()" />
+    </div>
+  </body>
+</html>

@@ -26,12 +26,12 @@ function onOpen() {
   SpreadsheetApp.getUi()
       .createMenu('ChangeRowColors')
       .addItem('Settings', 'showDialog')
+      .addItem('Parse all rows', 'showParseAllDialog')
       .addItem('Help', 'showDoc')
       .addToUi();
 }
 
 function showDialog() {
-  
   var html = HtmlService.createHtmlOutputFromFile('dialogBox')
        .setWidth(530)
        .setHeight(280);
@@ -47,3 +47,10 @@ function showDoc() {
       .showModalDialog(html, 'Plugin documentation (ChangeRowColors)');
 }
 
+function showParseAllDialog() {
+  var html = HtmlService.createHtmlOutputFromFile('parseAllDialogBox')
+       .setWidth(400)
+       .setHeight(100);
+  SpreadsheetApp.getUi()
+      .showModalDialog(html, 'Parse all rows (ChangeRowColors)');
+}
