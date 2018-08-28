@@ -10,8 +10,7 @@ function changeRowColor(e){
   var formatingRules = data["formatingRules"];
   
   // get the current row 
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheets()[0];
+  var sheet = SpreadsheetApp.getActiveSheet();
   var rowRange = sheet.getRange(e.range.getRow(),1,1,nbColumnsInRow);
   
   // change background color for the entire line
@@ -44,14 +43,11 @@ function onFormSubmit(e){
   changeRowColor(e);
 }
 
-
 function getRowsCount() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheets()[0];
+  var sheet = SpreadsheetApp.getActiveSheet();
   var rowsCount = sheet.getLastRow()-1;
   return rowsCount;
 }
-
 
 function parseAllRows() {
   // get parameters
@@ -64,8 +60,7 @@ function parseAllRows() {
   var formatingRules = data["formatingRules"];
   
   // iterate over rows and apply the formating rules
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheets()[0];
+  var sheet = SpreadsheetApp.getActiveSheet();
   var range = SpreadsheetApp.getActiveSheet().getActiveRange();
   var numRows = sheet.getLastRow()-1;
   for (var i = 0 ; i < numRows; i++){
