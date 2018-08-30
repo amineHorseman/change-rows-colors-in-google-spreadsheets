@@ -37,6 +37,9 @@ In case none of these values are found in the `watching column`, the `defaultCol
 
 Note: You can use color names (red, cyan, green...) or hexadecimal codes (#ff02a3..) in the settings panel.
 
+3. You can find a quick video demonstration for using the plugin here
+https://www.youtube.com/watch?v=NqZrslI7jAU
+
 
 ## II. Parse all document and change line colors:
 
@@ -54,6 +57,8 @@ If you just want to use the plugin:
 2. Open `Get add-ons` from `Add-ons` menu (Add-ons > Get add-ons)
 3. In the search bar type `Change Rows Color`
 4. Install the plugin (click `Free` button) and accept the request access 
+
+IMPORTANT: the plugin is actually under review by Google's team, it will be publicly available in the Chrome Web Store in the following days
 
 Note: We do not use, collect, send or store your data, we don't even have access to it :p 
 
