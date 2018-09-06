@@ -2,20 +2,48 @@
 
 A plugin to automatically change lines colors in a google spreasheet after update or form submission, if a certain column contains a certain value.
 
-# Description
+
+
+## Table of Contents  
+[1. Description](#description)
+
+[2. Examples](#examples)
+
+[3. How to use?](#how-to-use)
+
+[4. How to install for users?](#install-users)
+
+[5. How to install for developpers](#install-dev)
+
+[6. Feedback / Rating](#feedback)
+
+[7. Contributing](#contrib)
+
+<br />
+
+# <a name="description">Description</a>
 
 ChangeRowColors is a google form/spreadsheet plugin that change the background color of each line when you insert or update it (manually or after a form submission)
 
 The plugin will check a certain column and check its value, then apply a choosen background color to the line according the to column's value. This helps to visually separate between the lines, which is helpful for long todo lists, form submissions, stock inventories...ect.
 
+
+## <a name="examples">Examples</a>
+
+**1. Manual edit example:**
+
 ![Example](examples/example_todo_list.gif)
 
-For existing documents that have already some content, the plugin can check all the lines of the document inserted before and apply the color formating:
+**2. Form submission:**
+
+![Example](examples/example_form_submit.gif)
+
+**3. Colorizing an already existing document:**
 
 ![Example](examples/example_parse_all_rows.gif)
 
 
-# How to use
+# <a name="how-to-use">How to use?</a>
 
 After installing and activating the plugin, a new menu is created for the plugin settings:
 
@@ -49,8 +77,7 @@ This operation is useful if you installed the plugin in an already filled spread
 
 ![Example](examples/example_parse_all_rows.gif)
 
-
-# How to install for users
+# <a name="install-user">How to install for users?</a>
 
 If you just want to use the plugin:
 1. Open your google spreadsheet or create one in your google drive
@@ -58,12 +85,11 @@ If you just want to use the plugin:
 3. In the search bar type `Change Rows Color`
 4. Install the plugin (click `Free` button) and accept the request access 
 
-IMPORTANT: the plugin is actually under review by Google's team, it will be publicly available in the Chrome Web Store in the following days
+**IMPORTANT: the plugin is actually under review by Google's team, it will be publicly available in the Chrome Web Store in the following days**
 
 Note: We do not use, collect, send or store your data, we don't even have access to it :p 
 
-
-# How to install for developers
+# <a name="install-dev">How to install for developers?</a>
 
 Follow these instruction if you want to change the code and test your modifications:
 1. Open your google spreadsheet or create one in your google drive
@@ -75,14 +101,14 @@ Follow these instruction if you want to change the code and test your modificati
 7. Execute the function `OnInstall()` in the `ConfigDialogBox.gs` script to make sure the document properties and menus are created
 
 
-# Feedback / Ratings
+# <a name="feedback">Feedback / Rating</a>
 
-Help us increasing the visibility of the plugin by rating the plugin in the the Google Adds-on catalog or in the Chrome Web Store.
+Help us increasing the visibility of the plugin by rating the plugin in the the [Chrome Web Store](https://chrome.google.com/webstore/detail/nhppkfffhpjlfpdjhllmoeekmnfeccob).
 
 Your feedback is highly important to help us improve the plugin. Do not hesitate to write your feedback comments in the Chrome Web Store and report any bug in the [issues section of this repository](https://github.com/amineHorseman/change-rows-colors-in-google-spreadsheets/issues).
 
 
-# Contributing
+# <a name="contrib">Contributing</a>
 
 Some ideas for interessted contributors:
 - Change the design of the plugin settings window
